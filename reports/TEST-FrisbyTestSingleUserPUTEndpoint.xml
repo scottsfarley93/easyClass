@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+<testsuite name="Frisby Test: Single User PUT Endpoint" errors="0" tests="1" failures="0" time="0.053" timestamp="2017-05-17T08:41:12">
+  <testcase classname="Frisby Test: Single User PUT Endpoint" name="
+	[ PUT http://localhost:3000/api/users/1 ]" time="0.052"></testcase>
+</testsuite>
+</testsuites>

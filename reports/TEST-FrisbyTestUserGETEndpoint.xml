@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+<testsuite name="Frisby Test: User GET Endpoint" errors="0" tests="1" failures="0" time="0.177" timestamp="2017-05-17T08:41:10">
+  <testcase classname="Frisby Test: User GET Endpoint" name="
+	[ GET http://localhost:3000/api/users ]" time="0.172"></testcase>
+</testsuite>
+</testsuites>

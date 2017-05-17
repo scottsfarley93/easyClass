@@ -6,7 +6,7 @@ module.exports = (function() {
             port: '5432',
             user: 'postgres',
             password: '',
-            database: 'easyClass'
+            database: 'new_database'
         }
     });
 
