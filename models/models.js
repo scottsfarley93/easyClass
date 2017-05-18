@@ -3,29 +3,65 @@ module.exports = (function() {
     var Bookshelf = require("./../db")
         // Single user
     var User = Bookshelf.Model.extend({
-        tableName: 'public.Users',
+        tableName: 'User',
         hasTimestamps: true,
-        bcrypt: { field: 'password' }
+        bcrypt: { field: 'password' },
+        tags: function() {
+            return this.hasMany(Tag)
+        },
+        projects: function() {
+            return this.hasMany(Project)
+        }
     });
 
     var Project = Bookshelf.Model.extend({
-        tableName: 'Projects',
-        hasTimestamps: true
+        tableName: 'Project',
+        hasTimestamps: true,
+        tags: function() {
+            return this.hasMany(Tag)
+        },
+        classes: function() {
+            return this.hasMany(Class)
+        },
+        artifacts: function() {
+            return this.hasMany(Artifact)
+        },
+        user: function() {
+            return this.belongsTo(User)
+        }
     });
 
     var Tag = Bookshelf.Model.extend({
-        tableName: "Tags",
-        hasTimestamps: true
+        tableName: "Tag",
+        hasTimestamps: true,
+        user: function() {
+            return this.belongsTo(User)
+        }
     })
 
     var Class = Bookshelf.Model.extend({
-        tableName: "Classes",
-        hasTimestamps: true
+        tableName: "Class",
+        hasTimestamps: true,
+        project: function() {
+            return this.belongsTo(Project)
+        },
+        tags: function() {
+            return this.hasMany(Tag)
+        },
+        artifacts: function() {
+            return this.hasMany(Artifact)
+        }
     })
 
     var Artifact = Bookshelf.Model.extend({
-        tableName: "Artifacts",
-        hasTimestamps: true
+        tableName: "Artifact",
+        hasTimestamps: true,
+        project: function() {
+            this.belongsTo(Project)
+        },
+        tags: function() {
+            this.hasMany(Tag)
+        }
     })
 
     var Media = Bookshelf.Model.extend({
@@ -33,10 +69,6 @@ module.exports = (function() {
         hasTimestamps: true
     })
 
-    var Layout = Bookshelf.Model.extend({
-        tableName: "Layouts",
-        hasTimestamps: true
-    })
 
     //collection of users
     var Users = Bookshelf.Collection.extend({
@@ -63,10 +95,6 @@ module.exports = (function() {
         model: Artifact
     });
 
-    var Layouts = Bookshelf.Collection.extend({
-        model: Layout
-    })
-
     return {
         User: User,
         Users: Users,
@@ -76,8 +104,6 @@ module.exports = (function() {
         Tags: Tags,
         Artifact: Artifact,
         Artifacts: Artifacts,
-        Layout: Layout,
-        Layouts: Layouts,
         Media: Media,
         MediaCollection: MediaCollection,
         Class: Class,

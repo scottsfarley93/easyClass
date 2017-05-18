@@ -9,6 +9,14 @@ var router = express.Router();
 //create the server
 var app = express();
 
+var util = require('util');
+var knexClient = require('knex/lib/client');
+var origQuery = knexClient.prototype.query;
+knexClient.prototype.query = function(connection, obj) {
+    console.log(`SQL: ${obj.sql}  --  ${util.inspect(this.prepBindings(obj.bindings))}`);
+    return origQuery.apply(this, arguments);
+};
+
 
 
 // define middleware

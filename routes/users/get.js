@@ -15,9 +15,10 @@ module.exports = (function() {
             });
     };
 
+    //get user profile
     var getOne = function(req, res) {
         User.forge({ id: req.params.id })
-            .fetch()
+            .fetch({ withRelated: ['tags', 'projects'] })
             .then(function(user) {
                 if (!user) {
                     res.status(404).json({ error: true, data: {} });

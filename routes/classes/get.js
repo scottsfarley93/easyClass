@@ -17,7 +17,7 @@ module.exports = (function() {
 
     var getOne = function(req, res) {
         Class.forge({ id: req.params.id })
-            .fetch()
+            .fetch({ withRelated: ['project'] })
             .then(function(c) {
                 if (!c) {
                     res.status(404).json({ error: true, data: {} });
